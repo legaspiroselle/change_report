@@ -33,6 +33,11 @@ test/
 test-results/
 coverage/
 
+# All files containing "test" in the name (case insensitive)
+*test*
+*Test*
+*TEST*
+
 # PowerShell specific
 *.ps1xml
 *.psd1
