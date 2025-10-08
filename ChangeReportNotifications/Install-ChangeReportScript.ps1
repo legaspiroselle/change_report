@@ -256,13 +256,25 @@ function New-ConfigurationFile {
     $toEmails = Read-Host "To Email Addresses (comma-separated)"
     $toEmailArray = $toEmails -split "," | ForEach-Object { $_.Trim() }
     
-    $smtpUsername = Read-Host "SMTP Username (leave blank if not required)"
+    Write-Host "SMTP Authentication (leave blank if your SMTP server doesn't require authentication):" -ForegroundColor Cyan
+    $smtpUsername = Read-Host "SMTP Username (leave blank for anonymous/no authentication)"
     $smtpEncryptedPassword = ""
+    
     if (-not [string]::IsNullOrEmpty($smtpUsername)) {
         Write-Host "SMTP credentials will be encrypted for security." -ForegroundColor Yellow
-        $smtpCreds = Get-SecureCredentialInput -Title "SMTP Authentication" -Message "Enter SMTP credentials:"
-        $smtpUsername = $smtpCreds.Username
-        $smtpEncryptedPassword = $smtpCreds.EncryptedPassword
+        $needsPassword = Read-Host "Does this SMTP server require a password? (Y/N, default: Y)"
+        
+        if ($needsPassword -ne "N" -and $needsPassword -ne "n") {
+            $smtpCreds = Get-SecureCredentialInput -Title "SMTP Authentication" -Message "Enter SMTP credentials:"
+            $smtpUsername = $smtpCreds.Username
+            $smtpEncryptedPassword = $smtpCreds.EncryptedPassword
+        }
+        else {
+            Write-Host "Username provided without password - will use username with anonymous authentication" -ForegroundColor Yellow
+        }
+    }
+    else {
+        Write-Host "No SMTP credentials provided - will use anonymous authentication" -ForegroundColor Green
     }
     
     # Execution time

@@ -1,0 +1,28 @@
+{
+  "Database": {
+    "Server": "SQLSERVER01\\PROD",
+    "Database": "ChangeManagement",
+    "AuthType": "SQL",
+    "Username": "changereport_user",
+    "EncryptedPassword": "AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAPgcrDMs7L0eYtKCUDiP2UgAAAAACAAAAAAAQZgAAAAEAACAAAAA5KkGhp6BB/RqKBKcZwTBI3PRKN6LCioAWUHeeUkV97QAAAAAOgAAAAAIAACAAAAA8DSjPuixVI5MiMQoLkx2RQNbnFGDOpsxgcLs+OO1OWSAAAACIHMx9+u0IqCM4bk3rWcbCE/Gjw2S9QxGhFL4DKBrff0AAAADgOIfMYubvCrIKOYSY6aM9ktCJEd6/laXW4jyFntFdB8LcXSK+JV01Iz3hkkdOByFKiFnGhJO2cgEftU0itGkU"
+  },
+  "Email": {
+    "SMTPServer": "smtp.company.com",
+    "Port": 587,
+    "EnableSSL": true,
+    "From": "noreply@company.com",
+    "To": [
+      "admin@company.com",
+      "manager@company.com"
+    ],
+    "Username": "smtp_user",
+    "EncryptedPassword": "AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAPgcrDMs7L0eYtKCUDiP2UgAAAAACAAAAAAAQZgAAAAEAACAAAACKvJlgRcWrJ/fOUt5TUILcCrT1izg9OoYUOBhwnmluLAAAAAAOgAAAAAIAACAAAAAqlzKIF5wfLEqi6jyyw8XLGSZAd1Dxi24oOTW0AtcmlCAAAACiLxh8oDwkeHc/15ZDm1RUVCMNRsLEtKbNKTkYwL0tT0AAAADdbFTXrreYXhc3MDMg3pHP1qEtYQsezoTXrIY8b7E9+42FzQsjBq9x909HpAwN8sMMC32aYPUe60OW0TmQvcI2"
+  },
+  "Logging": {
+    "LogPath": "C:\\ChangeReportNotifications\\logs",
+    "LogLevel": "Info"
+  },
+  "Schedule": {
+    "ExecutionTime": "08:00"
+  }
+}

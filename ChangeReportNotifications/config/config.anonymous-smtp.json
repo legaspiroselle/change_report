@@ -1,0 +1,29 @@
+{
+  "_comment": "Configuration for SMTP servers that don't require authentication (anonymous)",
+  "Database": {
+    "Server": "SQLSERVER01\\PROD",
+    "Database": "ChangeManagement",
+    "AuthType": "Windows",
+    "Username": "",
+    "EncryptedPassword": ""
+  },
+  "Email": {
+    "SMTPServer": "mail.company.com",
+    "Port": 25,
+    "EnableSSL": false,
+    "From": "noreply@company.com",
+    "To": [
+      "admin@company.com",
+      "manager@company.com"
+    ],
+    "Username": "",
+    "EncryptedPassword": ""
+  },
+  "Logging": {
+    "LogPath": "C:\\ChangeReportNotifications\\logs",
+    "LogLevel": "Info"
+  },
+  "Schedule": {
+    "ExecutionTime": "08:00"
+  }
+}

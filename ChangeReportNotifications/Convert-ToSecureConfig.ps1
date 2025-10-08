@@ -102,14 +102,19 @@ try {
         }
     }
     
-    # Check email password
-    if ($config.Email.Password -and -not (Test-EncryptedString -String $config.Email.Password)) {
-        Write-ConversionLog "Found plain text email password" -Level "Warning"
-        $hasPlainTextPasswords = $true
-        $conversionNeeded = $true
+    # Check email password (optional)
+    if ($config.Email.Password) {
+        if (-not (Test-EncryptedString -String $config.Email.Password)) {
+            Write-ConversionLog "Found plain text email password" -Level "Warning"
+            $hasPlainTextPasswords = $true
+            $conversionNeeded = $true
+        }
     }
     elseif ($config.Email.EncryptedPassword) {
         Write-ConversionLog "Email password already encrypted"
+    }
+    else {
+        Write-ConversionLog "No email password configured (anonymous SMTP)" -Level "Info"
     }
     
     # Check if conversion is needed

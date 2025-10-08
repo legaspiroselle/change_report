@@ -201,11 +201,20 @@ function Get-SecureConfiguration {
             EncryptedPassword = $config.Email.EncryptedPassword
         }
         
-        # Add decrypted credential if SMTP authentication required
-        if (-not [string]::IsNullOrEmpty($configHash.Email.Username) -and
-            -not [string]::IsNullOrEmpty($configHash.Email.EncryptedPassword)) {
-            
-            $configHash.Email.Credential = New-SecureCredential -Username $configHash.Email.Username -EncryptedPassword $configHash.Email.EncryptedPassword
+        # Add decrypted credential if SMTP authentication is configured
+        if (-not [string]::IsNullOrEmpty($configHash.Email.Username)) {
+            if (-not [string]::IsNullOrEmpty($configHash.Email.EncryptedPassword)) {
+                # Full credential with username and password
+                $configHash.Email.Credential = New-SecureCredential -Username $configHash.Email.Username -EncryptedPassword $configHash.Email.EncryptedPassword
+            }
+            else {
+                # Username only (some SMTP servers accept username without password)
+                Write-Verbose "Email username provided without password - will attempt username-only authentication"
+            }
+        }
+        else {
+            # No credentials - will use anonymous authentication
+            Write-Verbose "No email credentials configured - will use anonymous SMTP authentication"
         }
         
         # Logging configuration (no sensitive data)

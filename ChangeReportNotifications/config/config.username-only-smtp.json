@@ -1,0 +1,29 @@
+{
+  "_comment": "Configuration for SMTP servers that require username but no password",
+  "Database": {
+    "Server": "SQLSERVER01\\PROD",
+    "Database": "ChangeManagement",
+    "AuthType": "Windows",
+    "Username": "",
+    "EncryptedPassword": ""
+  },
+  "Email": {
+    "SMTPServer": "relay.company.com",
+    "Port": 587,
+    "EnableSSL": true,
+    "From": "noreply@company.com",
+    "To": [
+      "admin@company.com",
+      "manager@company.com"
+    ],
+    "Username": "service-account@company.com",
+    "EncryptedPassword": ""
+  },
+  "Logging": {
+    "LogPath": "C:\\ChangeReportNotifications\\logs",
+    "LogLevel": "Info"
+  },
+  "Schedule": {
+    "ExecutionTime": "08:00"
+  }
+}

@@ -595,26 +595,38 @@ function Send-ChangeNotification {
             $smtpClient.Port = $Config.Email.Port
             $smtpClient.EnableSsl = $Config.Email.EnableSSL
             
-            # Configure authentication if credentials are provided
+            # Configure authentication based on configuration
             if ($Config.Email.Credential) {
-                # Use secure credential object
+                # Use secure credential object (preferred method)
+                Write-Verbose "Using secure credential authentication for SMTP"
                 $smtpClient.Credentials = New-Object System.Net.NetworkCredential(
                     $Config.Email.Credential.UserName,
                     $Config.Email.Credential.Password
                 )
+                $smtpClient.UseDefaultCredentials = $false
             }
             elseif (-not [string]::IsNullOrWhiteSpace($Config.Email.Username)) {
-                # Fallback for legacy configuration (not recommended)
-                Write-Warning "Using legacy email authentication method. Consider updating to secure configuration."
-                $credential = New-Object System.Net.NetworkCredential(
-                    $Config.Email.Username,
-                    $Config.Email.Password
-                )
-                $smtpClient.Credentials = $credential
+                # Fallback for legacy configuration or plain text credentials
+                Write-Verbose "Using username/password authentication for SMTP"
+                if (-not [string]::IsNullOrWhiteSpace($Config.Email.Password)) {
+                    Write-Warning "Using legacy email authentication method. Consider updating to secure configuration."
+                    $credential = New-Object System.Net.NetworkCredential(
+                        $Config.Email.Username,
+                        $Config.Email.Password
+                    )
+                    $smtpClient.Credentials = $credential
+                    $smtpClient.UseDefaultCredentials = $false
+                }
+                else {
+                    Write-Warning "Username provided but no password found. Using default credentials."
+                    $smtpClient.UseDefaultCredentials = $true
+                }
             }
             else {
-                # Use default credentials (current user context)
+                # No credentials provided - use anonymous or default credentials
+                Write-Verbose "No SMTP credentials provided - using anonymous/default authentication"
                 $smtpClient.UseDefaultCredentials = $true
+                $smtpClient.Credentials = $null
             }
             
             # Set timeout (30 seconds)
@@ -727,10 +739,12 @@ function Test-EmailConfiguration {
             }
         }
         
-        # Validate authentication settings
+        # Validate authentication settings (optional)
         if (-not [string]::IsNullOrWhiteSpace($Config.Email.Username)) {
-            if ([string]::IsNullOrWhiteSpace($Config.Email.Password)) {
-                $errors += "Password is required when Username is specified"
+            # If username is provided, password should also be provided (but not required for anonymous SMTP)
+            if ([string]::IsNullOrWhiteSpace($Config.Email.Password) -and 
+                [string]::IsNullOrWhiteSpace($Config.Email.EncryptedPassword)) {
+                Write-Warning "Username provided without password - will attempt anonymous authentication"
             }
         }
         

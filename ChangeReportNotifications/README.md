@@ -80,6 +80,8 @@ A PowerShell script system that automatically sends daily email notifications fo
 - **SQL**: Requires username and password
 
 ### Email Configuration
+
+#### Authenticated SMTP (Username + Password)
 ```json
 {
   "Email": {
@@ -89,7 +91,37 @@ A PowerShell script system that automatically sends daily email notifications fo
     "From": "noreply@company.com",
     "To": ["admin@company.com", "manager@company.com"],
     "Username": "smtp-user",
-    "Password": "smtp-password"
+    "EncryptedPassword": "AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA..."
+  }
+}
+```
+
+#### Anonymous SMTP (No Authentication)
+```json
+{
+  "Email": {
+    "SMTPServer": "mail.company.com",
+    "Port": 25,
+    "EnableSSL": false,
+    "From": "noreply@company.com",
+    "To": ["admin@company.com", "manager@company.com"],
+    "Username": "",
+    "EncryptedPassword": ""
+  }
+}
+```
+
+#### Username-Only SMTP (Username without Password)
+```json
+{
+  "Email": {
+    "SMTPServer": "relay.company.com",
+    "Port": 587,
+    "EnableSSL": true,
+    "From": "noreply@company.com",
+    "To": ["admin@company.com", "manager@company.com"],
+    "Username": "service-account@company.com",
+    "EncryptedPassword": ""
   }
 }
 ```
@@ -114,6 +146,34 @@ A PowerShell script system that automatically sends daily email notifications fo
   }
 }
 ```
+
+## SMTP Authentication Scenarios
+
+The system supports multiple SMTP authentication methods to accommodate different server configurations:
+
+### 1. **Anonymous SMTP** (No Authentication Required)
+- **Use Case**: Internal corporate mail servers, development environments
+- **Configuration**: Leave `Username` and `EncryptedPassword` empty
+- **Ports**: Typically port 25 (unencrypted) or 587 (with STARTTLS)
+- **Security**: Relies on network-level security (IP whitelisting, VPN, etc.)
+
+### 2. **Username + Password Authentication**
+- **Use Case**: External SMTP services (Gmail, Office 365, SendGrid, etc.)
+- **Configuration**: Provide both `Username` and `EncryptedPassword`
+- **Ports**: Typically port 587 (STARTTLS) or 465 (SSL/TLS)
+- **Security**: Credentials are encrypted using Windows DPAPI
+
+### 3. **Username-Only Authentication**
+- **Use Case**: Some corporate SMTP relays that identify users by username only
+- **Configuration**: Provide `Username` but leave `EncryptedPassword` empty
+- **Ports**: Varies by server configuration
+- **Security**: Username-based identification without password verification
+
+### 4. **Default Credentials (Windows Authentication)**
+- **Use Case**: SMTP servers that accept current Windows user credentials
+- **Configuration**: Leave both `Username` and `EncryptedPassword` empty
+- **Behavior**: Uses current user's Windows credentials automatically
+- **Security**: Leverages existing Windows authentication
 
 ## Usage
 

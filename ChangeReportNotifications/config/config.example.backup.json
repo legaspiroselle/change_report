@@ -1,0 +1,28 @@
+{
+  "Database": {
+    "Server": "SQLSERVER01\\PROD",
+    "Database": "ChangeManagement",
+    "AuthType": "SQL",
+    "Username": "changereport_user",
+    "Password": "MyPlainTextPassword123!"
+  },
+  "Email": {
+    "SMTPServer": "smtp.company.com",
+    "Port": 587,
+    "EnableSSL": true,
+    "From": "noreply@company.com",
+    "To": [
+      "admin@company.com",
+      "manager@company.com"
+    ],
+    "Username": "smtp_user",
+    "Password": "AnotherPlainTextPassword456!"
+  },
+  "Logging": {
+    "LogPath": "C:\\ChangeReportNotifications\\logs",
+    "LogLevel": "Info"
+  },
+  "Schedule": {
+    "ExecutionTime": "08:00"
+  }
+}
