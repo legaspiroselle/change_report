@@ -1,0 +1,28 @@
+{
+  "Database": {
+    "Server": "YOUR_SERVER\\INSTANCE",
+    "Database": "YOUR_DATABASE",
+    "AuthType": "Windows",
+    "Username": "",
+    "EncryptedPassword": ""
+  },
+  "Email": {
+    "SMTPServer": "smtp.company.com",
+    "Port": 587,
+    "EnableSSL": true,
+    "From": "noreply@company.com",
+    "To": [
+      "admin@company.com",
+      "manager@company.com"
+    ],
+    "Username": "",
+    "EncryptedPassword": ""
+  },
+  "Logging": {
+    "LogPath": "C:\\ChangeReportNotifications\\logs",
+    "LogLevel": "Info"
+  },
+  "Schedule": {
+    "ExecutionTime": "08:00"
+  }
+}

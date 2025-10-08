@@ -1,0 +1,248 @@
+# Change Report Email Notifications - Git Ignore File
+
+# Documentation files (keep only README.md)
+*.md
+!README.md
+
+# Kiro IDE files
+.kiro/
+*.kiro
+
+# Configuration files with sensitive data
+config/config.json
+config/config.prod.json
+config/config.dev.json
+config/config.local.json
+
+# Keep sample configurations
+!config/config.sample.json
+!config/config.test.json
+
+# Log files
+logs/
+*.log
+*.log.*
+
+# Test artifacts and results
+TestArtifacts/
+tests/
+test/
+*.test.log
+*.test.xml
+*.test.json
+test-results/
+coverage/
+
+# PowerShell specific
+*.ps1xml
+*.psd1
+*.psm1.bak
+
+# Temporary files
+*.tmp
+*.temp
+*~
+.DS_Store
+Thumbs.db
+
+# Windows specific
+desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+
+# IDE and editor files
+.vscode/
+.vs/
+*.swp
+*.swo
+*~
+
+# Package files
+*.zip
+*.7z
+*.tar.gz
+*.rar
+
+# Compiled files
+*.exe
+*.dll
+*.pdb
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+bin/
+obj/
+build/
+dist/
+
+# Dependency directories
+node_modules/
+packages/
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Database files
+*.mdf
+*.ldf
+*.sdf
+
+# Credential files
+credentials.json
+secrets.json
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Runtime files
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage
+.grunt
+
+# Bower dependency directory
+bower_components
+
+# Lock files (keep package-lock.json if using npm)
+yarn.lock
+package-lock.json
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+public
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Atom
+.atom/
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Vim
+*.swp
+*.swo
+*~
+.netrwhist
+
+# Custom application files
+execution-*.log
+transcript-*.log
+debug-*.log
+error-*.log
+
+# Installation temporary files
+install-*.log
+setup-*.log
+
+# Performance monitoring files
+performance-*.log
+metrics-*.json
+
+# Email test files
+email-test-*.html
+email-preview-*.html
+
+# Database connection test files
+db-test-*.log
+connection-test-*.log
+
+# SMTP test files
+smtp-test-*.log
+mail-test-*.log
