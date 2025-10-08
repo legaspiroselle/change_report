@@ -106,7 +106,8 @@ function Test-Configuration {
                 $errors += "Database username is required for SQL authentication"
                 $isValid = $false
             }
-            if ([string]::IsNullOrWhiteSpace($Config.Database.Password)) {
+            # Check for either Password (plain text) or EncryptedPassword (secure)
+            if ([string]::IsNullOrWhiteSpace($Config.Database.Password) -and [string]::IsNullOrWhiteSpace($Config.Database.EncryptedPassword)) {
                 $errors += "Database password is required for SQL authentication"
                 $isValid = $false
             }
