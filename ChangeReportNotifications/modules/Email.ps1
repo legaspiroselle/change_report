@@ -828,5 +828,4 @@ function Send-ErrorNotification {
 }
 
 # Functions are available when dot-sourced for testing
-# Export-ModuleMember would be used when this is imported as a proper module
-Export-ModuleMember -Function Format-ChangeReport, Format-ChangeTable, Get-EmailSubject, Get-EmailTemplate, Get-NoChangesEmailTemplate, Send-ChangeNotification, Test-EmailConfiguration, Send-ErrorNotification
+# Note: Export-ModuleMember is not needed when dot-sourcing

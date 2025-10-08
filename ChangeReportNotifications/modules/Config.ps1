@@ -240,5 +240,6 @@ function ConvertFrom-ConfigSecureString {
 if ($MyInvocation.MyCommand.CommandType -eq 'ExternalScript') {
     # Running as script, don't export
 } else {
-    Export-ModuleMember -Function Get-Configuration, Test-Configuration, ConvertTo-ConfigSecureString, ConvertFrom-ConfigSecureString
+    # Functions are available when dot-sourced
+    # Note: Export-ModuleMember is not needed when dot-sourcing
 }

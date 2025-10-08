@@ -510,5 +510,5 @@ function Convert-ToSecureConfiguration {
     }
 }
 
-# Export functions for module use
-Export-ModuleMember -Function Protect-ConfigString, Unprotect-ConfigString, New-SecureCredential, Get-SecureConfiguration, Set-SecureConfiguration, Get-SecureCredentialInput, Test-EncryptedString, Convert-ToSecureConfiguration
+# Functions are available when dot-sourced
+# Note: Export-ModuleMember is not needed when dot-sourcing

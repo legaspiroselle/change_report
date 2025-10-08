@@ -268,5 +268,5 @@ ORDER BY
     }
 }
 
-# Export functions for module use
-Export-ModuleMember -Function Connect-Database, Test-DatabaseConnection, Close-Database, Get-CriticalChanges
+# Functions are available when dot-sourced
+# Note: Export-ModuleMember is not needed when dot-sourcing

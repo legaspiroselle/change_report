@@ -219,8 +219,8 @@ function Remove-OldLogFiles {
     }
 }
 
-# Export functions
-Export-ModuleMember -Function Write-Log, Start-LogSession, Stop-LogSession, Get-LogFileName, Remove-OldLogFiles
+# Functions are available when dot-sourced
+# Note: Export-ModuleMember is not needed when dot-sourcing
 
 <#
 .SYNOPSIS
@@ -487,5 +487,5 @@ function Get-ErrorTypeDetails {
     }
 }
 
-# Export the new functions
-Export-ModuleMember -Function Write-Log, Start-LogSession, Stop-LogSession, Get-LogFileName, Remove-OldLogFiles, Send-ErrorNotification, Get-ErrorEmailTemplate, Get-ErrorTypeDetails
+# Functions are available when dot-sourced
+# Note: Export-ModuleMember is not needed when dot-sourcing
