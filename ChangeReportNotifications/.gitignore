@@ -37,6 +37,9 @@ coverage/
 *test*
 *Test*
 *TEST*
+*tests*
+*Tests*
+*TESTS*
 
 # PowerShell specific
 *.ps1xml
