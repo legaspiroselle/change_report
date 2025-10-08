@@ -134,7 +134,7 @@ function New-DirectoryStructure {
                 Write-InstallLog "Created directory: $dir" -Level "Success"
             }
             catch {
-                Write-InstallLog "Failed to create directory $dir: $($_.Exception.Message)" -Level "Error"
+                Write-InstallLog "Failed to create directory ${$dir}: $($_.Exception.Message)" -Level "Error"
                 return $false
             }
         }
@@ -202,7 +202,7 @@ function Copy-ScriptFiles {
                 Write-InstallLog "Copied: $file" -Level "Success"
             }
             catch {
-                Write-InstallLog "Failed to copy $file: $($_.Exception.Message)" -Level "Error"
+                Write-InstallLog "Failed to copy ${$file}: $($_.Exception.Message)" -Level "Error"
             }
         }
         else {
