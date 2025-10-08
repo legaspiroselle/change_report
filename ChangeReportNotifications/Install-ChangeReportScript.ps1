@@ -184,7 +184,8 @@ function Copy-ScriptFiles {
         "modules\Config.ps1",
         "modules\Database.ps1",
         "modules\Email.ps1",
-        "modules\Logging.ps1"
+        "modules\Logging.ps1",
+        "modules\SecureConfig.ps1"
     )
     
     foreach ($file in $filesToCopy) {
