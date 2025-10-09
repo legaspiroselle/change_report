@@ -761,71 +761,7 @@ function Test-EmailConfiguration {
     }
 }
 
-function Send-ErrorNotification {
-    <#
-    .SYNOPSIS
-        Sends error notification email when the main process fails
-    .PARAMETER Config
-        Configuration object containing email settings
-    .PARAMETER ErrorMessage
-        Error message to include in notification
-    .PARAMETER ErrorDetails
-        Additional error details for troubleshooting
-    .RETURNS
-        Boolean indicating success/failure
-    #>
-    param(
-        [Parameter(Mandatory = $true)]
-        [hashtable]$Config,
-        
-        [Parameter(Mandatory = $true)]
-        [string]$ErrorMessage,
-        
-        [Parameter(Mandatory = $false)]
-        [string]$ErrorDetails = ""
-    )
-    
-    try {
-        $subject = "Change Report System Error - $(Get-Date -Format 'yyyy-MM-dd')"
-        
-        $errorBody = @"
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .error-container { background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; padding: 20px; }
-        .error-header { color: #721c24; font-size: 18px; font-weight: bold; margin-bottom: 10px; }
-        .error-message { color: #721c24; margin-bottom: 15px; }
-        .error-details { background-color: #fff; border: 1px solid #ddd; padding: 10px; font-family: monospace; font-size: 12px; }
-        .timestamp { color: #6c757d; font-size: 12px; margin-top: 15px; }
-    </style>
-</head>
-<body>
-    <div class="error-container">
-        <div class="error-header">Change Report System Error</div>
-        <div class="error-message">
-            The daily change report process encountered an error and could not complete successfully.
-        </div>
-        <div class="error-message">
-            <strong>Error:</strong> $ErrorMessage
-        </div>
-        $(if ($ErrorDetails) { "<div class='error-details'><strong>Details:</strong><br>$($ErrorDetails -replace "`n", "<br>")</div>" })
-        <div class="timestamp">
-            Error occurred at: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
-        </div>
-    </div>
-</body>
-</html>
-"@
-        
-        return Send-ChangeNotification -Config $Config -Body $errorBody -Subject $subject
-    }
-    catch {
-        Write-Error "Failed to send error notification: $($_.Exception.Message)"
-        return $false
-    }
-}
+# Send-ErrorNotification function moved to Logging.ps1 to avoid conflicts
 
 # Functions are available when dot-sourced for testing
 # Note: Export-ModuleMember is not needed when dot-sourcing

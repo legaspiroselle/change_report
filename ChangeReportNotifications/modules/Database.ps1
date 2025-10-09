@@ -43,7 +43,10 @@ function Connect-Database {
             $connection.ConnectionString = $connectionString
             
             # Set credentials securely using SqlCredential
-            $connection.Credential = New-Object System.Data.SqlClient.SqlCredential($Config.Database.Credential.UserName, $Config.Database.Credential.Password)
+            # Make SecureString read-only as required by SqlCredential
+            $securePassword = $Config.Database.Credential.Password.Copy()
+            $securePassword.MakeReadOnly()
+            $connection.Credential = New-Object System.Data.SqlClient.SqlCredential($Config.Database.Credential.UserName, $securePassword)
         }
         else {
             throw "Invalid AuthType. Must be 'Windows' or 'SQL'"
