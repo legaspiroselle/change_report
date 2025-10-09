@@ -266,9 +266,22 @@ function New-ConfigurationFile {
         $needsPassword = Read-Host "Does this SMTP server require a password? (Y/N, default: Y)"
         
         if ($needsPassword -ne "N" -and $needsPassword -ne "n") {
-            $smtpCreds = Get-SecureCredentialInput -Title "SMTP Authentication" -Message "Enter SMTP credentials:"
-            $smtpUsername = $smtpCreds.Username
-            $smtpEncryptedPassword = $smtpCreds.EncryptedPassword
+            # Get password only, we already have the username
+            Write-Host "Enter SMTP password for user '$smtpUsername':" -ForegroundColor Yellow
+            $securePassword = Read-Host "Password" -AsSecureString
+            
+            # Convert secure string to plain text temporarily for encryption
+            $ptr = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($securePassword)
+            $plainPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringBSTR($ptr)
+            
+            # Encrypt the password
+            $smtpEncryptedPassword = Protect-ConfigString -PlainText $plainPassword
+            
+            # Clear sensitive data from memory
+            [System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ptr)
+            $plainPassword = $null
+            $securePassword.Dispose()
+            [System.GC]::Collect()
         }
         else {
             Write-Host "Username provided without password - will use username with anonymous authentication" -ForegroundColor Yellow
